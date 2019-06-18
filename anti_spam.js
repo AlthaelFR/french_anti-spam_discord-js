@@ -8,9 +8,9 @@ var messageLog = [];
 module.exports = async (client, options) => {
   /* Option Definitions */
   
-  const warnBuffer = (options && options.warnBuffer) || 3; // Default Value: 3
-  const maxBuffer = (options && options.maxBuffer) || 5; // Default Value: 5
-  const interval = (options && options.interval) || 1000; //Default Time: 2000MS (2 Seconds in Miliseconds)
+  const warnBuffer = (options && options.warnBuffer) || 10; // Default Value: 3
+  const maxBuffer = (options && options.maxBuffer) || 15; // Default Value: 5
+  const interval = (options && options.interval) || 7500; //Default Time: 2000MS (2 Seconds in Miliseconds)
   const warningMessage = (options && options.warningMessage) || "Le spam est interdit !\nMerci de ne pas spam !"; // Default Message: "please stop spamming!" (@User please stop spamming!)
   const banMessage = (options && options.banMessage) || "A été bannis pour avoir spam !"; // Default Message: "has been hit by ban hammer for spamming!" (@User has been hit by ban hammer for spamming!)
   const maxDuplicatesWarning = (options && options.maxDuplicatesWarning || 7); // Default Value: 7
@@ -72,6 +72,10 @@ module.exports = async (client, options) => {
     .setDescription(m.author.tag+ " "+ reply)
     .setColor('#'+Math.floor(Math.random()*16777215).toString(16))
     .setTimestamp();
+    message.channel.fetchMessages().then(messages => {
+        const botMessages = messages.filter(msg => m.author) 
+        message.channel.bulkDelete(botMessages, warnBuffer);
+    })
     m.channel.send(warnEmbed); // Regular Mention Expression for Mentions
    }
 
