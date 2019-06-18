@@ -36,6 +36,8 @@ module.exports = async (client, options) => {
   // Custom 'checkMessage' event that handles messages
  client.on("checkMessage", async (message) => {
  
+  if(message.author.bot) return;
+
   // Ban the User
   const banUser = async (m, banMsg) => {
     for (var i = 0; i < messageLog.length; i++) {
