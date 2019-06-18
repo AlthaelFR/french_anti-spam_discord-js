@@ -1,7 +1,7 @@
 # french_anti-spam_discord-js
 A french package for discord js to prevent spamming
 
-```
+```js
 const antispam = require('anti-spam-discord');
 antispam(client, {
     warnBuffer: 3, // Maximum ammount of messages allowed to send in the interval time before getting warned.
