@@ -5,27 +5,27 @@ A french package for discord js to prevent spamming
 
 ```js
 const Discord = require('discord.js');
-const antispam = require('anti-spam-discord'); // Requiring this module.
+const antispam = require('anti-spam-discord'); // A besoin de ce module.
 const client = new Discord.Client();
  
 client.on('ready', () => {
-  // Module Configuration Constructor
+  // Configuration de l'anti-spam
    antispam(client, {
-        warnBuffer: 3, // Maximum ammount of messages allowed to send in the interval time before getting warned.
-        maxBuffer: 5, // Maximum amount of messages allowed to send in the interval time before getting banned.
-        interval: 2000, // Amount of time in ms users can send the maxim amount of messages(maxBuffer) before getting banned. 
-        maxDuplicatesWarning: 7,// Maximum amount of duplicate messages a user can send in a timespan before getting warned.
-        maxDuplicatesBan: 10, // Maximum amount of duplicate messages a user can send in a timespan before getting banned.
-        deleteMessagesAfterBanForPastDays: 7, // Deletes the message history of the banned user in x days.
+        warnBuffer: 3, // Message maximum autorisé dans l'intervale séléctionnée avant de se faire avertir.
+        maxBuffer: 5, // Message maximum autorisé dans l'intervale séléctionnée avant de se faire ban.
+        interval: 2000, // Intervalle en ms. 
+        maxDuplicatesWarning: 7,// Nombre de message dupliqués maximum avant de se faire avertir.
+        maxDuplicatesBan: 10, // Nombre de message dupliqués maximum avant de se faire ban.
+        deleteMessagesAfterBanForPastDays: 7, // Supprime les messages du membres depuis en jours.
       });
       
-  // Rest of your code
+  // Reste de ton code //
 });
  
 client.on('message', msg => {
-  client.emit('checkMessage', msg); // This runs the filter on any message bot receives in any guilds.
+  client.emit('checkMessage', msg); // Va vérifier qu'il ne spam pas.
   
-  // Rest of your code
+  // Reste de ton code //
 }
  
 client.login('token');
